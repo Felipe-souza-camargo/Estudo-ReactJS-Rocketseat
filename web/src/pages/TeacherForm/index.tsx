@@ -4,6 +4,8 @@ import './style.css';
 import PageHeader from '../../componentes/pageHeader';
 import Input from '../../componentes/input';
 import warningIcon from '../../assests/images/icons/warning.svg';
+import Textarea from '../../componentes/Textarea';
+import Select from '../../componentes/Select';
 function TeacherForm() {
     return (
         <div id="page-teacher-form" className="container">
@@ -20,6 +22,7 @@ function TeacherForm() {
                     <Input name="avatar" label="Avatar" />
 
                     <Input name="whatsapp" label="WhatsApp" />
+                   <Textarea name="bio" label="biografia"></Textarea>
 
                 </fieldset>
 
@@ -28,10 +31,31 @@ function TeacherForm() {
                        Sobre a aula
                     </legend>
 
-                    <Input name="subject" label="Matéria" />
+                    <Select name="subject" label="Matéria"
+                    options={
+                        [{value:'Artes',label:'Artes'},
+                        {value:'Biologia',label:'Biologia'},
+                        {value:'Ciências',label:'Ciências'},
+                        {value:'Educação Física',label:'Educação Física'},
+                        {value:'Física',label:'Física'},
+                        {value:'Geografia',label:'Geografia'},
+                        {value:'história',label:'história'},
+                        {value:'Matemática',label:'Matemática'},
+                        {value:'Português',label:'Português'},
+                        {value:'Quimica',label:'Quimica'}]
+                    } />
 
                     <Input name="cost" label="Custo da sua hora por aula" />
 
+                </fieldset>
+                <fieldset>
+                    <legend>horários disponíveis
+                    <button type="button">+ novo horário</button>
+                    </legend>
+                    <div className="schedule-iten">
+                        
+                    </div>
+                   
                 </fieldset>
 
                 <footer>
