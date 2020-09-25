@@ -1,34 +1,52 @@
 import React from 'react'
 import whatsappIcon from '../../assests/images/icons/whatsapp.svg';
-import peronaFirst from '../../assests/images/pessoa1.png'
-import'./style.css';
-function TeacherItem(){
-return(
-    <article className="teacher-item">
-    <header>
-        <img src={peronaFirst} alt="Diego Fernandes" />
-        <div>
-            <strong>Diego Fernandes</strong>
-            <span>Química</span>
+import api from '../../services/api';
+import './style.css';
 
-        </div>
-    </header>
-    <p>
-        Entusiasta das melhores tecnologias de química avançada.
-          <br /><br />
-          Apaixonado por explodir coisas em laboratório e por mudar a vida das pessoas através de experiências. Mais de 200.000 pessoas já passaram por uma das minhas explosões.
-          </p>
+export interface Teacher{
+    id: number,
+    avatar: string,
+    bio: string,
+    cost: number,
+    name: string,
+    subject: string,
+    whatsapp: string,
+}
 
-    <footer>
-        <p>Preço por hora
-            <strong>R$80,00</strong>
-        </p>
-        <button type="button">
-            <img src={whatsappIcon} alt="Whatsapp" />
+interface TeacherItemProps {
+    teacher: Teacher
+}
+
+//var constante do tipo function componenmte que irá receber algumas propriedades
+const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+
+    function createNewConnection(){
+        api.post('connections',{
+        user_id: teacher.id,})
+    }
+
+    return (
+        <article className="teacher-item">
+            <header>
+                <img src={teacher.avatar} alt={teacher.name} />
+                <div>
+                    <strong>{teacher.name}</strong>
+                    <span>{teacher.subject}</span>
+
+                </div>
+            </header>
+            <p>{teacher.bio}</p>
+
+            <footer>
+                <p>Preço por hora
+            <strong>{teacher.cost}</strong>
+                </p>
+                <a target='_blank' onClick={createNewConnection} href={`https://wa.me/${teacher.whatsapp}`}>
+                    <img src={whatsappIcon} alt="Whatsapp" />
         Entrar em contato
-    </button>
-    </footer>
-</article>
-)
+    </a>
+            </footer>
+        </article>
+    )
 }
 export default TeacherItem;
